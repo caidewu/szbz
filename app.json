@@ -1,0 +1,48 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/dayun/index",
+        "pages/liunian/index"
+    ],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationStyle": "custom"
+    },
+    "tabBar": {
+        "color": "#b7b7b7",
+        "selectedColor": "#343434",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/home.png",
+                "selectedIconPath": "images/home-s.png",
+                "text": "八字"
+            },
+            {
+                "pagePath": "pages/dayun/index",
+                "iconPath": "images/dayun.png",
+                "selectedIconPath": "images/dayun-s.png",
+                "text": "大运"
+            },
+            {
+                "pagePath": "pages/liunian/index",
+                "iconPath": "images/liunian.png",
+                "selectedIconPath": "images/liunian-s.png",
+                "text": "流年"
+            }
+        ]
+    },
+    "style": "v2",
+    "renderer": "skyline",
+    "rendererOptions": {
+        "skyline": {
+            "defaultDisplayBlock": true,
+            "disableABTest": true,
+            "sdkVersionBegin": "3.0.0",
+            "sdkVersionEnd": "15.255.255"
+        }
+    },
+    "componentFramework": "glass-easel",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}
