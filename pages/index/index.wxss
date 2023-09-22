@@ -8,3 +8,6 @@ page {
   flex: 1;
   overflow-y: hidden;
 }
+.picker {
+    padding: 10px;
+}

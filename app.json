@@ -5,8 +5,8 @@
         "pages/liunian/index"
     ],
     "window": {
-        "navigationBarTextStyle": "black",
-        "navigationStyle": "custom"
+        "navigationBarTitleText": "八字",
+        "navigationBarTextStyle": "black"
     },
     "tabBar": {
         "color": "#b7b7b7",

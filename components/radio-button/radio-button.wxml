@@ -1,0 +1,4 @@
+<!--components/radio-button/radio-button.wxml-->
+<view class="container">
+  <view wx:for="{{ radios }}" wx:key="index" class="item {{ item.selected }}" bindtap="onSelect" data-index="{{ index }}">{{ item.value }}</view>
+</view>
