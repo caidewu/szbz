@@ -8,55 +8,92 @@
     </view>
   </picker>
 </view>
+<view>
+    <button bindtap="onAdd">添加</button>
+    <view wx:if="{{ bazi.sg }}" class="bazi-container">
+        <view class="row title">
+            <view class="column">时柱</view>
+            <view class="column">日柱</view>
+            <view class="column">月柱</view>
+            <view class="column">年柱</view>
+            <view class="column">说明</view>
+        </view>
+        <view class="row">
+            <view class="column shishen">{{ shishen.sg }}</view>
+            <view class="column shishen">日主</view>
+            <view class="column shishen">{{ shishen.yg }}</view>
+            <view class="column shishen">{{ shishen.ng }}</view>
+            <view class="column">十神</view>
+        </view>
+        <view class="row">
+            <view class="column gan {{ color[bazi.sg] }} ">{{ bazi.sg }}</view>
+            <view class="column gan {{ color[bazi.rg] }}">{{ bazi.rg }}</view>
+            <view class="column gan {{ color[bazi.yg] }}">{{ bazi.yg }}</view>
+            <view class="column gan {{ color[bazi.ng] }}">{{ bazi.ng }}</view>
+            <view class="column">天干</view>
+        </view>
+        <view class="row">
+            <view class="column zhi {{ color[bazi.sz] }}">{{ bazi.sz }}</view>
+            <view class="column zhi {{ color[bazi.rz] }}">{{ bazi.rz }}</view>
+            <view class="column zhi {{ color[bazi.yz] }}">{{ bazi.yz }}</view>
+            <view class="column zhi {{ color[bazi.nz] }}">{{ bazi.nz }}</view>
+            <view class="column">地支</view>
+        </view>
+        <view class="row">
+            <view class="column shishen">
+                <view wx:for="{{ canggan.sz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ canggan.rz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ canggan.yz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ canggan.nz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column">藏干</view>
+        </view>
+        <view class="row">
+            <view class="column shishen">
+                <view wx:for="{{ shishen.sz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shishen.rz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shishen.yz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shishen.nz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column">十神</view>
+        </view>
+        <view class="row">
+            <view class="column shishen">{{ shengwang.sz }}</view>
+            <view class="column shishen">{{ shengwang.rz }}</view>
+            <view class="column shishen">{{ shengwang.yz }}</view>
+            <view class="column shishen">{{ shengwang.nz }}</view>
+            <view class="column">生旺库</view>
+        </view>
+        <view class="row">
+            <view class="column shishen">
+                <view wx:for="{{ shensha.sz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shensha.rz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shensha.yz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column shishen">
+                <view wx:for="{{ shensha.nz }}" wx:key="index">{{ item }}</view>
+            </view>
+            <view class="column">神煞</view>
+        </view>
+    </view>
+</view>
 <scroll-view class="scrollarea" scroll-y type="list">
-  <view> 四kkkk柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四柱八字 </view>
-  <view> 四字 </view>
+  
+  <view wx:if="{{ kongwang }}"> 日柱空亡：{{ kongwang }} </view>
 </scroll-view>
