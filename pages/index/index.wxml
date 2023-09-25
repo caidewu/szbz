@@ -1,7 +1,24 @@
 <!--index.wxml-->
 <navigation-bar title="八字" back="{{false}}" color="black" background="#FFF"></navigation-bar>
 <view>
-    <radio-button list="{{ calendarTypes }}" selected-index="{{ calendarIndex }}" bind:change="onTypeChange"></radio-button>
+    <view class="add-container">
+        <view class="add-row">
+            <view class="label">姓名：</view>
+            <view class="input"></view>
+        </view>
+        <view class="add-row">
+            <view class="label">性别：</view>
+            <view class="input"></view>
+        </view>
+        <view class="add-row">
+            <view class="label">历法：</view>
+            <view class="input">
+                <radio-button list="{{ calendarTypes }}" selected-index="{{ calendarIndex }}" bind:change="onTypeChange"></radio-button>
+        </view>
+    </view>
+
+        
+    </view>
     <picker mode="multiSelector" bindchange="bindPickerChange" bindcolumnchange="bindPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
     <view class="picker">
       选择：{{multiArray[0][selectedIndex[0]]}}年{{multiArray[1][selectedIndex[1]]}}{{multiArray[2][selectedIndex[2]] }} {{ multiArray[3][selectedIndex[3]]}}
@@ -10,6 +27,8 @@
 </view>
 <view>
     <button bindtap="onAdd">添加</button>
+    <view wx:if="{{ solarText }}">阳历：{{ solarText }}</view>
+    <view wx:if="{{ lunarText }}">阴历：{{ lunarText }}</view>
     <view wx:if="{{ bazi.sg }}" class="bazi-container">
         <view class="row title">
             <view class="column">时柱</view>

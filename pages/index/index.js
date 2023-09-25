@@ -37,32 +37,8 @@ function getDays(year, month, isSolar) {
     console.log(dayCount)
     return LUNAR_DAY_LIST.slice(0, dayCount)
 }
-const GAN = {
-    '甲': 0,
-    '乙': 1,
-    '丙': 2,
-    '丁': 3,
-    '戊': 4,
-    '己': 5,
-    '庚': 6,
-    '辛': 7,
-    '壬': 8,
-    '癸': 9,
-}
-const ZHI = {
-    '子': 0,
-    '丑': 1,
-    '寅': 2,
-    '卯': 3,
-    '辰': 4,
-    '巳': 5,
-    '午': 6,
-    '未': 7,
-    '申': 8,
-    '酉': 9,
-    '戌': 10,
-    '亥': 11, 
-};
+const GAN = ['甲', '乙', '丙', '丁', '戊', '己', '庚', '辛', '壬', '癸' ];
+const ZHI = ['子', '丑', '寅', '卯', '辰', '巳', '午', '未', '申', '酉', '戌', '亥'];
 const SHENSHA_NAME = {
     NZ: ['孤辰', '寡宿', '大耗', '大耗' ],
     YZ: ['天德贵人', '月德贵人'],
@@ -101,67 +77,15 @@ const SHENSHA = {
 
 const YEAR_LIST = generateYearArray();
 const DEFAULT_YEAR_INDEX =  YEAR_LIST.length - 71;
-const MONTH_LIST = [
-    '1月',
-    '2月',
-    '3月',
-    '4月',
-    '5月',
-    '6月',
-    '7月',
-    '8月',
-    '9月',
-    '10月',
-    '11月',
-    '12月'
-  ];
+const MONTH_LIST = [ '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
 const LUNAR_MONTH_LIST = getMonths(DEFAULT_YEAR_INDEX, false)
+const LUNAR_MONTH_TEXTS = ['', '正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
 /*
-    '正月',
-    '二月',
-    '三月',
-    '四月',
-    '五月',
-    '六月',
-    '七月',
-    '八月',
-    '九月',
-    '十月',
-    '冬月',
-    '腊月'
+    '正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'
 */
 const DAY_LIST = getDays(DEFAULT_YEAR_INDEX, 1, true);
 const LUNAR_DAY_LIST = [
-  '初一',
-  '初二',
-  '初三',
-  '初四',
-  '初五',
-  '初六',
-  '初七',
-  '初八',
-  '初九',
-  '初十',
-  '十一',
-  '十二',
-  '十三',
-  '十四',
-  '十五',
-  '十六',
-  '十七',
-  '十八',
-  '十九',
-  '二十',
-  '廿一',
-  '廿二',
-  '廿三',
-  '廿四',
-  '廿五',
-  '廿六',
-  '廿七',
-  '廿八',
-  '廿九',
-  '三十'
+  '初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十', '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'
 ];
 const SC_TEXT_LIST = [
     '00:00~00:59 早子时',
@@ -178,21 +102,7 @@ const SC_TEXT_LIST = [
     '21:00~22:59 亥时',
     '23:00~23:59 晚子时'
   ];
-  const SC_LIST = [
-    '0',
-    '1',
-    '3',
-    '5',
-    '7',
-    '9',
-    '11',
-    '13',
-    '15',
-    '17',
-    '19',
-    '21',
-    '23'
-  ];
+  const SC_LIST = [ '0', '1', '3', '5', '7', '9', '11', '13', '15', '17', '19', '21', '23'];
 Page({
     data: {
         calendarTypes: ['阳历', '阴历'],
@@ -201,6 +111,7 @@ Page({
         bazi: {},
         shishen: {},
         canggan: {},
+        text: '',
         multiArray: [YEAR_LIST, MONTH_LIST, DAY_LIST, SC_TEXT_LIST],
         color: {
             '甲': 'green',
@@ -244,7 +155,7 @@ Page({
         switch ( column ) {
             case 0: {
                 const months = getMonths(value, this.data.isSolar);
-                const days = getDays(value, this.data.multiIndex[1] + 1 );
+                const days = getDays(value, this.data.multiIndex[1] + 1,  this.data.isSolar );
                 if (this.data.multiIndex[1] >= months.length) {
                     this.setData({ 'multiIndex[1]': months.length - 1 });
                 }
@@ -258,7 +169,7 @@ Page({
                 break;
             }
             case 1: {
-                const days = getDays(YEAR_LIST[this.data.multiIndex[0]], value + 1 );
+                const days = getDays(YEAR_LIST[this.data.multiIndex[0]], value + 1, this.data.isSolar);
                 if (this.data.multiIndex[2] >= days.length) {
                     this.setData({ 'multiIndex[2]': days.length - 1 });
                 }
@@ -308,17 +219,24 @@ Page({
         const day = this.data.selectedIndex[2] + 1;
         let month = monthIndex + 1; // 月份 1-12
         const hour = SC_LIST[this.data.selectedIndex[3]];
-
+        
         const text = this.data.multiArray[0][this.data.selectedIndex[0]] + 
                         '年' + this.data.multiArray[1][monthIndex] +
                         this.data.multiArray[2][this.data.selectedIndex[2]] +
                         this.data.multiArray[3][this.data.selectedIndex[3]];
-
+        let solarText;
+        let lunarText;
         let lunar;
         if (this.data.isSolar) {
             // 构建Date对象
             const solar = Solar.fromYmdHms(year, month, day, hour, 0, 0)
+            console.log('==================', solar.toString())
+            solarText = text;
             lunar = solar.getLunar();
+            const m = lunar.getMonth();
+            const monthText = m > 0 ? LUNAR_MONTH_TEXTS[m] : '闰' + LUNAR_MONTH_TEXTS[-m];
+            lunarText = lunar.getYear() + '年' + monthText + LUNAR_DAY_LIST[lunar.getDay()] + ' ' + this.data.multiArray[3][this.data.selectedIndex[3]]
+            // console.log(lunar.toString() + ' ' + this.data.multiArray[3][this.data.selectedIndex[3]])
             
         } else {
             // 阴历闰月特殊处理
@@ -330,10 +248,10 @@ Page({
                     runFlag = 0;
                     return 0 - index;
                 }
-                return index + runFlag;
-                
+                return index + runFlag;               
             })
-           console.log('lunarMonth', lunarMonths)
+            lunarText = text;
+            console.log('lunarMonth', lunarMonths)
             const lunarDate = {
                 year,
                 month: lunarMonths[monthIndex],
@@ -343,11 +261,16 @@ Page({
                 text,
             }
             lunar = Lunar.fromYmdHms(year, lunarMonths[monthIndex], day, hour, 0, 0)
-          
+            // 转阳历
+            var solar = lunar.getSolar();
+            solarText = solar.getYear() + '年' + solar.getMonth() + '月' + solar.getDay() + '日' + ' ' + this.data.multiArray[3][this.data.selectedIndex[3]]
+            console.log(solar.toString());
         }
 
         const bz = lunar.getEightChar();
         this.setData({
+            solarText,
+            lunarText,
             bazi: {
                 ng: bz.getYearGan(),
                 yg: bz.getMonthGan(),
@@ -390,10 +313,10 @@ Page({
     },
     getShensha() {
         const { ng, nz, yg, yz, rg, rz, sg, sz } = this.data.bazi;
-        const nzIndex = ZHI[nz];
-        const yzIndex = ZHI[yz];
-        const rzIndex = ZHI[rz];
-        const rgIndex = GAN[rg];
+        const nzIndex = ZHI.indexOf(nz);
+        const yzIndex = ZHI.indexOf(yz);
+        const rzIndex = ZHI.indexOf(rz);
+        const rgIndex = GAN.indexOf(rg);
         const bazi = {
             nz: [ng, nz],
             yz: [yg, yz],

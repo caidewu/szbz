@@ -65,3 +65,10 @@ page {
 .blue {
     color: rgb(0, 102, 255);
 }
+
+.add-row {
+    display: flex;
+    width: 100%;
+    padding: 5px 0;
+    align-items: center;
+}
